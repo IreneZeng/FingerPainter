@@ -1,0 +1,4 @@
+<resources>
+    <string name="app_name">FingerPainter</string>
+    <item name="FingerPainterViewId" type="id" />
+</resources>

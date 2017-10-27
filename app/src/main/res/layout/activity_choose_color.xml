@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="example.com.fingerpainter.ChooseColorActivity">
+
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="368dp"
+        android:layout_height="495dp"
+        android:orientation="vertical"
+        android:weightSum="1"
+        tools:layout_editor_absoluteY="8dp"
+        tools:layout_editor_absoluteX="8dp">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="120dp"
+            android:layout_weight="0.33"
+            android:layout_marginTop="40dp"
+            android:orientation="horizontal"
+            android:weightSum="1">
+
+            <Button
+                android:id="@+id/yellowButton"
+                android:layout_width="120dp"
+                android:layout_height="120dp"
+                android:layout_marginLeft="60dp"
+                android:background="@drawable/round_button"
+                android:layout_weight="0.01" />
+
+            <Button
+                android:id="@+id/redButton"
+                android:layout_width="120dp"
+                android:layout_height="120dp"
+                android:layout_marginLeft="20dp"
+                android:background="@drawable/round_button"
+                android:layout_weight="0.01"/>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="120dp"
+            android:layout_weight="0.33"
+            android:orientation="horizontal"
+            android:weightSum="1">
+
+            <Button
+                android:id="@+id/blackButton"
+                android:layout_width="120dp"
+                android:layout_height="120dp"
+                android:layout_marginLeft="60dp"
+                android:background="@drawable/round_button"
+                android:layout_weight="0.01"/>
+
+            <Button
+                android:id="@+id/purpleButton"
+                android:layout_width="120dp"
+                android:layout_height="120dp"
+                android:background="@drawable/round_button"
+                android:layout_marginLeft="20dp"
+                android:layout_weight="0.01"/>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="120dp"
+            android:orientation="horizontal"
+            android:layout_weight="0.33"
+            android:weightSum="1">
+
+            <Button
+                android:id="@+id/blueButton"
+                android:layout_width="120dp"
+                android:layout_height="120dp"
+                android:layout_marginLeft="60dp"
+                android:background="@drawable/round_button"
+                android:layout_weight="0.01" />
+
+            <Button
+                android:id="@+id/greenButton"
+                android:layout_width="120dp"
+                android:layout_height="120dp"
+                android:layout_marginLeft="20dp"
+                android:background="@drawable/round_button"
+                android:layout_weight="0.01" />
+        </LinearLayout>
+
+    </LinearLayout>
+
+</android.support.constraint.ConstraintLayout>

@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="utf-8"?>
+<items version="2" >
+
+    <item
+        is-multidex="true"
+        jar="/Users/irene/.android/build-cache/830a51fde286df6e6c96fc788eca1b34d2dc8a78/output/jars/classes.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="26.0.2"
+        sha1="d7c42c80f6509b9ea4db28ca7859ffae08ec5741">
+        <dex dex="/Users/irene/AndroidStudioProjects/FingerPainter/app/build/intermediates/transforms/dex/debug/folders/1000/10/classes_3c688df61b91c8b5a3b11403fe18c375a336fb29/classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="/Users/irene/.android/build-cache/2ad86a1c207581b0342513275a352e31b933d873/output/jars/classes.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="26.0.2"
+        sha1="052f5f840f21174a3ecf6544130194e2652cbb73">
+        <dex dex="/Users/irene/AndroidStudioProjects/FingerPainter/app/build/intermediates/transforms/dex/debug/folders/1000/10/classes_4ba34fc98c28f1864ece8056d6933d592879287c/classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="/Users/irene/.android/build-cache/44186eacb4f147580d6c664e4cb437efefd73d20/output/jars/classes.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="26.0.2"
+        sha1="4a26a1154d053ab11aaf4c3967c42a4d66390991">
+        <dex dex="/Users/irene/AndroidStudioProjects/FingerPainter/app/build/intermediates/transforms/dex/debug/folders/1000/10/classes_a05ff5cfd6ff445dfbcc45dd9d37dead4f8491f1/classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="/Users/irene/.android/build-cache/1a5b9ad7a894340d6c6d9b3341a2906579edc9b8/output/jars/classes.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="26.0.2"
+        sha1="6ef31f1555bb4cc513ec8d52711365a8b89f3600">
+        <dex dex="/Users/irene/AndroidStudioProjects/FingerPainter/app/build/intermediates/transforms/dex/debug/folders/1000/10/classes_fc4e83c7a75e8df785e45bb68e663ce51017513b/classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="/Users/irene/.android/build-cache/067c2f6ed71e6b13d1bc5856811dc566cde78eb4/output/jars/classes.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="26.0.2"
+        sha1="150252b33b00274cc868578ade018fda0d43a3eb">
+        <dex dex="/Users/irene/AndroidStudioProjects/FingerPainter/app/build/intermediates/transforms/dex/debug/folders/1000/10/classes_f0a3a369317fdb1c4232919d239d636844217b9a/classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="/Users/irene/.android/build-cache/c122335354ebe209bcd1b5aa699208c890cbaa70/output/jars/classes.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="26.0.2"
+        sha1="45f697922e6f072daa12f8a2995dc77ab03c11da">
+        <dex dex="/Users/irene/AndroidStudioProjects/FingerPainter/app/build/intermediates/transforms/dex/debug/folders/1000/10/classes_d320f81587cdc96d6030ebf8bd8e1649bec2a95e/classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="/Users/irene/AndroidStudioProjects/FingerPainter/app/build/intermediates/incremental-runtime-classes/debug/instant-run.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="26.0.2"
+        sha1="3be78ebc2706b2e1fe2f12d5726887a92d6c183b">
+        <dex dex="/Users/irene/AndroidStudioProjects/FingerPainter/app/build/intermediates/transforms/dex/debug/folders/1000/10000/instant-run_7f7c025d7b3723e4c4443fe998496c5e7daae795/classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="/Users/irene/Library/Android/sdk/extras/android/m2repository/com/android/support/support-annotations/25.3.1/support-annotations-25.3.1.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="26.0.2"
+        sha1="bf8841d29fa39e077730e7a91222c2ce269fa7c9">
+        <dex dex="/Users/irene/AndroidStudioProjects/FingerPainter/app/build/intermediates/transforms/dex/debug/folders/1000/10/support-annotations-25.3.1_9e92bf81d10d133ed959865d5a4c6e7242dcc0c3/classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="/Users/irene/.android/build-cache/bbc77dea187b487a1817dee1aeb8d3d5277123c8/output/jars/classes.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="26.0.2"
+        sha1="47635644d0d5c103c1dd8360549eb9ba3225c7d3">
+        <dex dex="/Users/irene/AndroidStudioProjects/FingerPainter/app/build/intermediates/transforms/dex/debug/folders/1000/10/classes_5ead8f7e1c127177a022f07359e0c5eca2b43a83/classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="/Users/irene/AndroidStudioProjects/FingerPainter/app/build/intermediates/incremental-classes/debug/instant-run-bootstrap.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="26.0.2"
+        sha1="d866baa6c1f5e28f89c3380019a895d8db035e12">
+        <dex dex="/Users/irene/AndroidStudioProjects/FingerPainter/app/build/intermediates/transforms/dex/debug/folders/1000/10000/instant-run-bootstrap_f21aab5b5e193cbeaaf4c3793bf52d45f6fe4b74/classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="/Users/irene/.android/build-cache/ae46ea031d836e02e94a6cf35787e41abd7344c3/output/jars/classes.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="26.0.2"
+        sha1="efb8cb62d47d157c29d1521daac7eefd4cb881ee">
+        <dex dex="/Users/irene/AndroidStudioProjects/FingerPainter/app/build/intermediates/transforms/dex/debug/folders/1000/10/classes_db62661f4cf008a8623ee92b5231feafee34e0c6/classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="/Users/irene/.android/build-cache/0d0eb7528f3695cec574e2e5affb9206e604f5d6/output/jars/classes.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="26.0.2"
+        sha1="da27a32db6af8954ee8061537c7d476fcb1df46f">
+        <dex dex="/Users/irene/AndroidStudioProjects/FingerPainter/app/build/intermediates/transforms/dex/debug/folders/1000/10/classes_74a46b28c81d6622687f572167cb881460d3e7e2/classes.dex" />
+    </item>
+
+</items>
