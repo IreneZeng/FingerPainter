@@ -74,7 +74,6 @@ public class ChooseColorActivity extends AppCompatActivity implements View.OnCli
                 chosenColor = BLACK;
                 break;
         }
-
         intent.putExtra("newColor", chosenColor);
         setResult(RESULT_OK, intent);
         finish();

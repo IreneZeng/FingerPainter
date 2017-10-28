@@ -25,10 +25,11 @@ import java.util.concurrent.LinkedBlockingDeque;
 public class ChooseBrushActivity extends AppCompatActivity implements View.OnClickListener{
     Intent intent = new Intent();
     private static int MAX_PROGRESS = 100;
-    private static int START_X = 0;
     private static int width;
     private static int height;
     private static int currentBrushWidth;
+    private static int newBrushWidth;
+    private static int currentColor;
     private static Bitmap bitmap;
     private static Canvas canvas;
     private static Paint.Cap ROUND_BRUSH = Paint.Cap.ROUND;
@@ -40,7 +41,6 @@ public class ChooseBrushActivity extends AppCompatActivity implements View.OnCli
     private static boolean rSelected = false;
     private static boolean sSelected = false;
     private static SeekBar brushWidthSeekBar;
-    private static int currentColor;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -89,7 +89,7 @@ public class ChooseBrushActivity extends AppCompatActivity implements View.OnCli
                 LinearLayout baseLayout = (LinearLayout) findViewById(R.id.baseLayout);
                 width = baseLayout.getWidth();
                 height = baseLayout.getHeight();
-                bitmap = Bitmap.createBitmap(width/2, height/2, Bitmap.Config.ARGB_8888);
+                bitmap = Bitmap.createBitmap(width, height, Bitmap.Config.ARGB_8888);
                 canvas = new Canvas(bitmap);
                 drawStroke(canvas, bitmap, currentBrushWidth, strokeImageView);
             }
@@ -98,10 +98,9 @@ public class ChooseBrushActivity extends AppCompatActivity implements View.OnCli
 
     public void seekbarListener () {
         brushWidthSeekBar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
-            int newBrushWidth;
             @Override
             public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
-                Bitmap bitmap = Bitmap.createBitmap(width/2, height/2, Bitmap.Config.ARGB_8888);
+                Bitmap bitmap = Bitmap.createBitmap(width, height, Bitmap.Config.ARGB_8888);
                 canvas.setBitmap(bitmap);
                 drawStroke(canvas, bitmap, progress, strokeImageView);
 
@@ -124,26 +123,29 @@ public class ChooseBrushActivity extends AppCompatActivity implements View.OnCli
     // draw the stroke to indicate the brush width
     public void drawStroke(Canvas imageCanvas, Bitmap bitmap, int brushWidth, ImageView imageView) {
         Paint paint = new Paint();
+        int start_x = 0;
+        int end_x = bitmap.getWidth();
+        int start_y = bitmap.getHeight()/2;
+        int end_y = bitmap.getHeight()/2;
 
-//        if (rSelected) {
-//            paint.setStrokeCap(Paint.Cap.ROUND);
-//        } else {
-//            paint.setStrokeCap(Paint.Cap.SQUARE);
-//        }
-
+        if (rSelected) {
+            paint.setStrokeCap(Paint.Cap.ROUND);
+            start_x = brushWidth;
+            end_x = end_x - brushWidth;
+        } else {
+            paint.setStrokeCap(Paint.Cap.SQUARE);
+        }
         paint.setColor(currentColor);
         paint.setStyle(Paint.Style.STROKE);
-        paint.setStrokeJoin(Paint.Join.ROUND);
-        paint.setStrokeCap(Paint.Cap.ROUND);
         paint.setStrokeWidth(brushWidth);
         paint.setAntiAlias(true);
         paint.setDither(true);
 
         imageCanvas.drawLine(
-                START_X,
-                imageCanvas.getHeight(),
-                imageCanvas.getWidth(),
-                imageCanvas.getHeight(),
+                start_x,
+                start_y,
+                end_x,
+                end_y,
                 paint
         );
 
@@ -154,6 +156,15 @@ public class ChooseBrushActivity extends AppCompatActivity implements View.OnCli
     @Override
     public void onClick(View view) {
         Paint.Cap brush;
+
+        // Update the brush width
+        int brushWidth = currentBrushWidth;
+        bitmap = Bitmap.createBitmap(width, height, Bitmap.Config.ARGB_8888);
+        canvas = new Canvas(bitmap);
+
+        if(newBrushWidth != 0) {
+            brushWidth = newBrushWidth;
+        }
 
         switch (view.getId()) {
 
@@ -167,6 +178,10 @@ public class ChooseBrushActivity extends AppCompatActivity implements View.OnCli
                     rSelected = true;
                     sSelected = false;
                 }
+
+                // Update the stroke
+                drawStroke(canvas, bitmap, brushWidth, strokeImageView);
+
                 break;
 
             case R.id.squareBrushButton:
@@ -179,6 +194,10 @@ public class ChooseBrushActivity extends AppCompatActivity implements View.OnCli
                     sSelected = true;
                     rSelected = false;
                 }
+
+                // Update the stroke
+                drawStroke(canvas, bitmap, brushWidth, strokeImageView);
+
                 break;
 
             case R.id.finish_setting_button:

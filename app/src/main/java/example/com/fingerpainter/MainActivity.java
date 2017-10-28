@@ -11,11 +11,11 @@ import android.widget.LinearLayout;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener{
     private static FingerPainterView fingerPainterView;
-    private static String eraser = "#ffffffff";
     private static int CHOOSE_COLOR = 0;
-    private static int CHOOSE_BURSH = 1;
+    private static int CHOOSE_BRUSH = 1;
     private static int colorBeforeEraser;
     private static boolean clicked = true;
+    private static String eraser = "#ffffffff";
     private static ImageButton eraserButton;
 
     @Override
@@ -67,7 +67,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 bundle.putSerializable("currentBrushStyle", currentBrushStyle);
                 intent.putExtras(bundle);
 
-                startActivityForResult(intent, CHOOSE_BURSH);
+                startActivityForResult(intent, CHOOSE_BRUSH);
                 break;
 
             case R.id.eraserButton:
@@ -99,12 +99,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 colorBeforeEraser = Color.parseColor(chosenColor);
             }
         }
-        if (requestCode == CHOOSE_BURSH) {
-
+        if (requestCode == CHOOSE_BRUSH) {
             // Back to the main activity only when the user chose the brush style
             if (resultCode == RESULT_OK) {
-                fingerPainterView.setColour(colorBeforeEraser);  // To discard eraser function
-
                 Paint.Cap brushStyle = ((Paint.Cap) data.getSerializableExtra("newBrushStyle"));
 
                 // deal the "go back" button
@@ -117,7 +114,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                     int brushWidth = data.getExtras().getInt("newBrushWidth");
                     fingerPainterView.setBrushWidth(brushWidth);
                 }
-
             }
         }
     }
