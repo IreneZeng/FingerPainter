@@ -14,8 +14,10 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private static int CHOOSE_COLOR = 0;
     private static int CHOOSE_BRUSH = 1;
     private static int colorBeforeEraser;
-    private static boolean clicked = true;
-    private static String eraser = "#ffffffff";
+    private static int widthBeforeEraser;
+    private static int eraserSize = 70;
+    private static boolean selected = false;
+    private static String eraserColor = "#ffffffff";
     private static ImageButton eraserButton;
 
     @Override
@@ -26,6 +28,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         fingerPainterView = new FingerPainterView(this);
 
         colorBeforeEraser = fingerPainterView.getColour();
+        widthBeforeEraser = fingerPainterView.getBrushWidth();
 
         fingerPainterView.load(getIntent().getData());
 
@@ -52,9 +55,16 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             case R.id.chooseColorButton:
                 intent = new Intent(this, ChooseColorActivity.class);
                 bundle = new Bundle();
-                bundle.putInt("currentColor", fingerPainterView.getColour());
-                intent.putExtras(bundle);
 
+                //
+                if (selected) {
+                    bundle.putInt("currentColor", colorBeforeEraser);
+                    bundle.putInt("currentWidth", widthBeforeEraser);
+                } else {
+                    bundle.putInt("currentColor", fingerPainterView.getColour());
+                }
+
+                intent.putExtras(bundle);
                 startActivityForResult(intent, CHOOSE_COLOR);
                 break;
 
@@ -63,8 +73,13 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
                 // Pass the current brush color, brush width and style to the ChooseBrushActivity
                 bundle = new Bundle();
-                bundle.putInt("currentColor", fingerPainterView.getColour());
-                bundle.putInt("currentBrushWidth", fingerPainterView.getBrushWidth());
+                if (selected) {
+                    bundle.putInt("currentColor", colorBeforeEraser);
+                    bundle.putInt("currentBrushWidth", widthBeforeEraser);
+                } else {
+                    bundle.putInt("currentColor", fingerPainterView.getColour());
+                    bundle.putInt("currentBrushWidth", fingerPainterView.getBrushWidth());
+                }
                 bundle.putSerializable("currentBrushStyle", fingerPainterView.getBrush());
                 intent.putExtras(bundle);
 
@@ -72,15 +87,17 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 break;
 
             case R.id.eraserButton:
-                if (clicked) {
+                if (!selected) {
                     eraserButton.setImageResource(R.drawable.eraser_button_active);
-                    fingerPainterView.setColour(Color.parseColor(eraser));
-                    clicked = false;
+                    fingerPainterView.setColour(Color.parseColor(eraserColor));
+                    fingerPainterView.setBrushWidth(eraserSize);
+                    selected = true;
 
                 } else {
                     eraserButton.setImageResource(R.drawable.eraser_button_inactive);
                     fingerPainterView.setColour(colorBeforeEraser);
-                    clicked = true;
+                    fingerPainterView.setBrushWidth(widthBeforeEraser);
+                    selected = false;
                 }
                 break;
 
@@ -95,25 +112,39 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
         if (requestCode == CHOOSE_COLOR) {
             if (resultCode == RESULT_OK) {
-                int chosenColor = data.getExtras().getInt("newColor");
-                fingerPainterView.setColour(chosenColor);
-                colorBeforeEraser = chosenColor;
+                if (selected) {
+                    // Disable the eraser settings
+                    eraserButton.setImageResource(R.drawable.eraser_button_inactive);
+                    fingerPainterView.setBrushWidth(widthBeforeEraser);
+                    selected = false;
+                }
+
+                fingerPainterView.setColour(data.getExtras().getInt("newColor"));
+                colorBeforeEraser = data.getExtras().getInt("newColor");
             }
         }
         if (requestCode == CHOOSE_BRUSH) {
-            // Back to the main activity only when the user chose the brush style
             if (resultCode == RESULT_OK) {
-                Paint.Cap brushStyle = ((Paint.Cap) data.getSerializableExtra("newBrushStyle"));
-
-                // deal the "go back" button
-                if(brushStyle != null) {
-                    fingerPainterView.setBrush(brushStyle);
+                if (selected) {
+                    // Disable the eraser functionality
+                    fingerPainterView.setColour(colorBeforeEraser);
+                    eraserButton.setImageResource(R.drawable.eraser_button_inactive);
+                    selected = false;
                 }
 
-                if (data.getExtras().size() == 2 || (data.getExtras().size() == 1 && brushStyle == null)) {
+                Paint.Cap newBrushStyle = ((Paint.Cap) data.getSerializableExtra("newBrushStyle"));
+                int newBrushWidth = data.getExtras().getInt("newBrushWidth");
+
+                if(newBrushStyle != null) {
+                    fingerPainterView.setBrush(newBrushStyle);
+                }
+
+                if (newBrushWidth != 0) {
                     // check whether the user changed the brush width
-                    int brushWidth = data.getExtras().getInt("newBrushWidth");
-                    fingerPainterView.setBrushWidth(brushWidth);
+                    fingerPainterView.setBrushWidth(newBrushWidth);
+                    widthBeforeEraser = newBrushWidth;
+                } else {
+                    fingerPainterView.setBrushWidth(widthBeforeEraser);
                 }
             }
         }

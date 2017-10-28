@@ -15,6 +15,7 @@ import android.support.v7.widget.LinearLayoutCompat;
 import android.util.Log;
 import android.view.View;
 import android.view.ViewTreeObserver;
+import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -59,7 +60,7 @@ public class ChooseBrushActivity extends AppCompatActivity implements View.OnCli
         squareBrushButton = (ImageButton) findViewById(R.id.squareBrushButton);
         squareBrushButton.setOnClickListener(this);
 
-        ImageButton finishSettingButton = (ImageButton) findViewById(R.id.finish_setting_button);
+        Button finishSettingButton = (Button) findViewById(R.id.finish_setting_button);
         finishSettingButton.setOnClickListener(this);
 
         // Set default brush style
@@ -105,6 +106,9 @@ public class ChooseBrushActivity extends AppCompatActivity implements View.OnCli
                 drawStroke(canvas, bitmap, progress, strokeImageView);
 
                 // Update the width of the stroke based on the progress
+                if (progress == 0) {
+                    progress = 1;
+                }
                 newBrushWidth = progress;
             }
 
@@ -172,7 +176,7 @@ public class ChooseBrushActivity extends AppCompatActivity implements View.OnCli
                 brush = ROUND_BRUSH;
                 intent.putExtra("newBrushStyle", brush);
 
-                if ((rSelected == false && sSelected == false) || (rSelected == false && sSelected == true)) {
+                if ((!rSelected && !sSelected) || (!rSelected && sSelected)) {
                     roundBrushButton.setImageResource(R.drawable.round_brush_button_active);
                     squareBrushButton.setImageResource(R.drawable.square_brush_button_inactive);
                     rSelected = true;
@@ -188,7 +192,7 @@ public class ChooseBrushActivity extends AppCompatActivity implements View.OnCli
                 brush = SQUARE_BRUSH;
                 intent.putExtra("newBrushStyle", brush);
 
-                if ((sSelected == false && rSelected == false) || (sSelected == false && rSelected == true)) {
+                if ((!sSelected && !rSelected) || (!sSelected && rSelected)) {
                     squareBrushButton.setImageResource(R.drawable.square_brush_button_active);
                     roundBrushButton.setImageResource(R.drawable.round_brush_button_inactive);
                     sSelected = true;
