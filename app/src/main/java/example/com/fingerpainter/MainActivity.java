@@ -46,25 +46,26 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     @Override
     public void onClick(View view) {
         Intent intent;
+        Bundle bundle;
 
         switch (view.getId()) {
             case R.id.chooseColorButton:
                 intent = new Intent(this, ChooseColorActivity.class);
+                bundle = new Bundle();
+                bundle.putInt("currentColor", fingerPainterView.getColour());
+                intent.putExtras(bundle);
+
                 startActivityForResult(intent, CHOOSE_COLOR);
                 break;
 
             case R.id.chooseBrushButton:
                 intent = new Intent(this, ChooseBrushActivity.class);
 
-                int currentBrushWidth = fingerPainterView.getBrushWidth();
-                Paint.Cap currentBrushStyle = fingerPainterView.getBrush();
-                int currentColor = fingerPainterView.getColour();
-
                 // Pass the current brush color, brush width and style to the ChooseBrushActivity
-                Bundle bundle = new Bundle();
-                bundle.putInt("currentColor", currentColor);
-                bundle.putInt("currentBrushWidth", currentBrushWidth);
-                bundle.putSerializable("currentBrushStyle", currentBrushStyle);
+                bundle = new Bundle();
+                bundle.putInt("currentColor", fingerPainterView.getColour());
+                bundle.putInt("currentBrushWidth", fingerPainterView.getBrushWidth());
+                bundle.putSerializable("currentBrushStyle", fingerPainterView.getBrush());
                 intent.putExtras(bundle);
 
                 startActivityForResult(intent, CHOOSE_BRUSH);
@@ -94,9 +95,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
         if (requestCode == CHOOSE_COLOR) {
             if (resultCode == RESULT_OK) {
-                String chosenColor = data.getExtras().getString("newColor");
-                fingerPainterView.setColour(Color.parseColor(chosenColor));
-                colorBeforeEraser = Color.parseColor(chosenColor);
+                int chosenColor = data.getExtras().getInt("newColor");
+                fingerPainterView.setColour(chosenColor);
+                colorBeforeEraser = chosenColor;
             }
         }
         if (requestCode == CHOOSE_BRUSH) {
