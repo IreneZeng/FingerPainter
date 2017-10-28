@@ -48,7 +48,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         Intent intent;
 
         switch (view.getId()) {
-
             case R.id.chooseColorButton:
                 intent = new Intent(this, ChooseColorActivity.class);
                 startActivityForResult(intent, CHOOSE_COLOR);
@@ -59,9 +58,11 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
                 int currentBrushWidth = fingerPainterView.getBrushWidth();
                 Paint.Cap currentBrushStyle = fingerPainterView.getBrush();
+                int currentColor = fingerPainterView.getColour();
 
-                // Pass the current brush width and style to the ChooseBrushActivity
+                // Pass the current brush color, brush width and style to the ChooseBrushActivity
                 Bundle bundle = new Bundle();
+                bundle.putInt("currentColor", currentColor);
                 bundle.putInt("currentBrushWidth", currentBrushWidth);
                 bundle.putSerializable("currentBrushStyle", currentBrushStyle);
                 intent.putExtras(bundle);
@@ -70,7 +71,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 break;
 
             case R.id.eraserButton:
-
                 if (clicked) {
                     eraserButton.setImageResource(R.drawable.eraser_button_active);
                     fingerPainterView.setColour(Color.parseColor(eraser));

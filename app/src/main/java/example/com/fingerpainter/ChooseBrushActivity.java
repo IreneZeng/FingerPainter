@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
 import android.graphics.Color;
+import android.graphics.CornerPathEffect;
 import android.graphics.Paint;
 import android.media.Image;
 import android.os.Handler;
@@ -23,28 +24,30 @@ import java.util.concurrent.LinkedBlockingDeque;
 
 public class ChooseBrushActivity extends AppCompatActivity implements View.OnClickListener{
     Intent intent = new Intent();
-    private static Paint.Cap ROUND_BRUSH = Paint.Cap.ROUND;
-    private static Paint.Cap SQUARE_BRUSH = Paint.Cap.SQUARE;
     private static int MAX_PROGRESS = 100;
     private static int START_X = 0;
-    private static Bitmap bitmap;
-    private static ImageView strokeImageView;
-    private static Canvas canvas;
-    private static int currentBrushWidth;
-    private static Paint.Cap currentBrushStyle;
     private static int width;
     private static int height;
+    private static int currentBrushWidth;
+    private static Bitmap bitmap;
+    private static Canvas canvas;
+    private static Paint.Cap ROUND_BRUSH = Paint.Cap.ROUND;
+    private static Paint.Cap SQUARE_BRUSH = Paint.Cap.SQUARE;
+    private static Paint.Cap currentBrushStyle;
     private static ImageButton roundBrushButton;
     private static ImageButton squareBrushButton;
+    private static ImageView strokeImageView;
     private static boolean rSelected = false;
     private static boolean sSelected = false;
     private static SeekBar brushWidthSeekBar;
+    private static int currentColor;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_choose_brush);
 
+        currentColor = getIntent().getExtras().getInt("currentColor");
         currentBrushWidth = getIntent().getExtras().getInt("currentBrushWidth");
         currentBrushStyle = ((Paint.Cap) getIntent().getExtras().getSerializable("currentBrushStyle"));
 
@@ -120,11 +123,18 @@ public class ChooseBrushActivity extends AppCompatActivity implements View.OnCli
 
     // draw the stroke to indicate the brush width
     public void drawStroke(Canvas imageCanvas, Bitmap bitmap, int brushWidth, ImageView imageView) {
-        imageCanvas.setBitmap(bitmap);
         Paint paint = new Paint();
 
-        paint.setColor(Color.BLACK);
+//        if (rSelected) {
+//            paint.setStrokeCap(Paint.Cap.ROUND);
+//        } else {
+//            paint.setStrokeCap(Paint.Cap.SQUARE);
+//        }
+
+        paint.setColor(currentColor);
         paint.setStyle(Paint.Style.STROKE);
+        paint.setStrokeJoin(Paint.Join.ROUND);
+        paint.setStrokeCap(Paint.Cap.ROUND);
         paint.setStrokeWidth(brushWidth);
         paint.setAntiAlias(true);
         paint.setDither(true);
@@ -138,6 +148,7 @@ public class ChooseBrushActivity extends AppCompatActivity implements View.OnCli
         );
 
         imageView.setImageBitmap(bitmap);
+        imageView.invalidate();
     }
 
     @Override
